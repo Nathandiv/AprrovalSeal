@@ -1,0 +1,1034 @@
+.preview-container {
+  @apply sticky top-4;
+}
+
+.preview-header {
+  @apply bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6;
+}
+
+.preview-title {
+  @apply text-lg font-semibold text-gray-900 mb-4;
+}
+
+.template-badge {
+  @apply text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded;
+}
+
+.invoice-preview {
+  @apply bg-white border border-gray-200 rounded-lg p-4 sm:p-8 text-sm mt-4;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .preview-container {
+    @apply static;
+  }
+  
+  .invoice-preview {
+    @apply p-4 text-xs;
+  }
+}
+
+/* Classic Template Styles */
+.template-content {
+  @apply space-y-6 sm:space-y-8;
+}
+
+.invoice-header {
+  @apply flex flex-col sm:flex-row justify-between items-start space-y-4 sm:space-y-0;
+}
+
+.header-left .invoice-title {
+  @apply text-2xl sm:text-3xl font-bold text-gray-900 mb-2;
+}
+
+.header-left .invoice-number {
+  @apply text-base sm:text-lg text-gray-600;
+}
+
+.header-right {
+  @apply text-left sm:text-right;
+}
+
+.company-name {
+  @apply text-xl sm:text-2xl font-bold text-gray-900 mb-2;
+}
+
+.company-details {
+  @apply text-gray-600;
+}
+
+.invoice-info {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8;
+}
+
+.info-title {
+  @apply font-semibold text-gray-900 mb-2;
+}
+
+.client-name {
+  @apply font-medium text-gray-700;
+}
+
+.client-details {
+  @apply text-gray-700;
+}
+
+.dates {
+  @apply space-y-1;
+}
+
+.date-row {
+  @apply flex justify-between;
+}
+
+.date-label {
+  @apply font-medium;
+}
+
+.items-table {
+  @apply w-full overflow-x-auto;
+}
+
+.items-header {
+  @apply bg-gray-50 border-b-2 border-gray-200;
+}
+
+.item-cell {
+  @apply py-2 sm:py-3 px-2 sm:px-4;
+}
+
+.items-header .item-cell {
+  @apply font-semibold text-left;
+}
+
+.items-header .item-cell:nth-child(2),
+.item-row .item-cell:nth-child(2) {
+  @apply text-center;
+}
+
+.items-header .item-cell:nth-child(3),
+.items-header .item-cell:nth-child(4),
+.item-row .item-cell:nth-child(3),
+.item-row .item-cell:nth-child(4) {
+  @apply text-right;
+}
+
+.item-row {
+  @apply border-b border-gray-100;
+}
+
+.totals-section {
+  @apply flex justify-end;
+}
+
+.totals-box {
+  @apply w-full sm:w-64 space-y-2;
+}
+
+.total-line {
+  @apply flex justify-between;
+}
+
+.total-line.final {
+  @apply text-base sm:text-lg font-bold border-t pt-2;
+}
+
+.notes-section {
+  @apply border-t pt-6;
+}
+
+.notes-title {
+  @apply font-semibold text-gray-900 mb-2;
+}
+
+.notes-content {
+  @apply text-gray-700 whitespace-pre-line;
+}
+
+/* Modern Template Styles */
+.modern .modern-header {
+  @apply border-l-4 border-gray-900 pl-4 sm:pl-6 mb-6 sm:mb-8;
+}
+
+.modern-title {
+  @apply text-3xl sm:text-4xl font-light text-gray-900 mb-2;
+}
+
+.modern-number {
+  @apply text-lg sm:text-xl text-gray-600;
+}
+
+.modern-info {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8;
+}
+
+.modern-company {
+  @apply space-y-4;
+}
+
+.modern-client {
+  @apply space-y-4;
+}
+
+.client-title {
+  @apply font-semibold text-gray-900 mb-2 uppercase tracking-wide;
+}
+
+.dates-box {
+  @apply bg-gray-50 p-4 rounded;
+}
+
+.modern-table .modern-header-row {
+  @apply bg-gray-900 text-white;
+}
+
+.modern-table .modern-header-row .item-cell {
+  @apply py-3 sm:py-4 font-medium;
+}
+
+.modern-table .item-row {
+  @apply border-b border-gray-200;
+}
+
+.modern-table .item-row .item-cell {
+  @apply py-3 sm:py-4;
+}
+
+.modern-totals {
+  @apply w-full sm:w-64 bg-gray-50 p-4 sm:p-6 rounded space-y-3;
+}
+
+.modern-totals .final {
+  @apply text-lg sm:text-xl font-bold border-t-2 border-gray-300 pt-3;
+}
+
+.modern .notes-title {
+  @apply uppercase tracking-wide;
+}
+
+/* Professional Template Styles */
+.professional .professional-header {
+  @apply bg-gray-900 text-white p-4 sm:p-6 -m-4 sm:-m-8 rounded-t-lg mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0;
+}
+
+.professional-title {
+  @apply text-2xl sm:text-3xl font-bold mb-2;
+}
+
+.professional-number {
+  @apply text-gray-300;
+}
+
+.header-company .company-name {
+  @apply text-lg sm:text-xl font-bold;
+}
+
+.professional-info {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8;
+}
+
+.company-box,
+.client-box {
+  @apply bg-gray-50 p-4 rounded;
+}
+
+.box-title {
+  @apply font-semibold text-gray-900 mb-3;
+}
+
+.box-content {
+  @apply text-gray-700 space-y-1;
+}
+
+.client-section {
+  @apply space-y-4;
+}
+
+.dates-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm;
+}
+
+.date-box {
+  @apply bg-gray-50 p-3 rounded;
+}
+
+.date-label {
+  @apply font-medium text-gray-700;
+}
+
+.date-value {
+  @apply text-gray-600;
+}
+
+.professional-table {
+  @apply border border-gray-300;
+}
+
+.professional-header-row {
+  @apply bg-gray-50 border-b border-gray-300;
+}
+
+.professional-header-row .item-cell {
+  @apply font-semibold text-gray-800;
+}
+
+.professional-table .item-row {
+  @apply border-b border-gray-200;
+}
+
+.professional-totals {
+  @apply w-full sm:w-64 border border-gray-300;
+}
+
+.totals-content {
+  @apply bg-gray-50 p-4 space-y-2;
+}
+
+.final-total {
+  @apply bg-gray-900 text-white p-4;
+}
+
+.final-total .total-line {
+  @apply text-base sm:text-lg font-bold;
+}
+
+.professional-notes {
+  @apply bg-gray-50 p-4 rounded;
+}
+
+/* Creative Template Styles */
+.creative .creative-header {
+  @apply bg-gradient-to-r from-gray-800 to-gray-600 p-4 sm:p-6 rounded-lg text-white mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-start space-y-4 sm:space-y-0;
+}
+
+.creative-title {
+  @apply text-3xl sm:text-4xl font-bold mb-2;
+}
+
+.creative-number {
+  @apply text-gray-300 text-base sm:text-lg;
+}
+
+.creative-info {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8;
+}
+
+.from-box {
+  @apply bg-gray-100 p-4 rounded-lg border-l-4 border-gray-800;
+}
+
+.to-section {
+  @apply space-y-4;
+}
+
+.to-box {
+  @apply bg-gray-100 p-4 rounded-lg border-l-4 border-gray-600;
+}
+
+.creative .box-title {
+  @apply font-bold text-gray-900 mb-2;
+}
+
+.creative .dates-grid .date-box {
+  @apply bg-gray-50 p-3 rounded;
+}
+
+.creative .date-label {
+  @apply font-bold text-gray-700;
+}
+
+.creative-table {
+  @apply rounded-lg overflow-hidden border border-gray-200;
+}
+
+.creative-header-row {
+  @apply bg-gradient-to-r from-gray-800 to-gray-600 text-white;
+}
+
+.creative-header-row .item-cell {
+  @apply py-3 sm:py-4 font-bold;
+}
+
+.creative-table .item-row.even {
+  @apply bg-white;
+}
+
+.creative-table .item-row.odd {
+  @apply bg-gray-50;
+}
+
+.creative-table .item-row .item-cell {
+  @apply py-3 sm:py-4;
+}
+
+.creative-totals {
+  @apply w-full sm:w-64;
+}
+
+.creative-totals .totals-content {
+  @apply bg-gray-50 p-4 rounded-t-lg space-y-2;
+}
+
+.creative-totals .final-total {
+  @apply bg-gradient-to-r from-gray-800 to-gray-600 text-white p-4 rounded-b-lg;
+}
+
+.creative-totals .final-total .total-line {
+  @apply text-lg sm:text-xl font-bold;
+}
+
+.creative-notes {
+  @apply bg-gray-100 p-4 rounded-lg border-l-4 border-gray-800;
+}
+
+.creative-notes .notes-title {
+  @apply font-bold text-gray-900 mb-2;
+}
+
+/* Branded Template Styles */
+.branded .branded-header {
+  @apply flex flex-col sm:flex-row items-center justify-between mb-6 sm:mb-8 pb-6 border-b-2 border-gray-900 space-y-4 sm:space-y-0;
+}
+
+.branded-right .branded-header-right {
+  @apply flex-row-reverse;
+}
+
+.logo-section {
+  @apply flex-shrink-0;
+}
+
+.logo-placeholder {
+  @apply w-24 sm:w-32 h-16 sm:h-20 bg-gray-100 border-2 border-dashed border-gray-400 rounded-lg flex flex-col items-center justify-center text-gray-500;
+}
+
+.logo-icon {
+  @apply text-xl sm:text-2xl mb-1;
+}
+
+.logo-text {
+  @apply text-xs font-medium;
+}
+
+.header-info {
+  @apply text-center sm:text-right;
+}
+
+.branded-right .header-info {
+  @apply text-center sm:text-left;
+}
+
+.branded-title {
+  @apply text-3xl sm:text-4xl font-bold text-gray-900 mb-2;
+}
+
+.branded-number {
+  @apply text-lg sm:text-xl text-gray-600;
+}
+
+.branded-company {
+  @apply mb-6 sm:mb-8;
+}
+
+.branded-company .company-name {
+  @apply text-2xl sm:text-3xl font-bold text-gray-900 mb-3;
+}
+
+.branded-info {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8;
+}
+
+.section-title {
+  @apply font-bold text-gray-900 mb-3 uppercase tracking-wide;
+}
+
+.dates-section {
+  @apply space-y-4;
+}
+
+.date-item {
+  @apply flex flex-col;
+}
+
+.date-item .date-label {
+  @apply font-bold text-gray-700 text-sm uppercase tracking-wide;
+}
+
+.date-item .date-value {
+  @apply text-gray-600 text-base sm:text-lg;
+}
+
+.branded-table {
+  @apply border-2 border-gray-900;
+}
+
+.branded-header-row {
+  @apply bg-gray-900 text-white;
+}
+
+.branded-header-row .item-cell {
+  @apply py-3 sm:py-4 font-bold uppercase tracking-wide;
+}
+
+.branded-table .item-row {
+  @apply border-b border-gray-200;
+}
+
+.branded-table .item-row .item-cell {
+  @apply py-3 sm:py-4;
+}
+
+.branded-totals {
+  @apply w-full sm:w-80 ml-auto space-y-3 border-2 border-gray-900 p-4 sm:p-6;
+}
+
+.branded-totals .total-line {
+  @apply flex justify-between text-base sm:text-lg;
+}
+
+.branded-totals .final {
+  @apply text-xl sm:text-2xl font-bold border-t-2 border-gray-900 pt-3 uppercase;
+}
+
+/* Corporate Template Styles */
+.corporate .corporate-header {
+  @apply mb-6 sm:mb-8;
+}
+
+.header-top {
+  @apply flex flex-col sm:flex-row items-center justify-between mb-4 space-y-4 sm:space-y-0;
+}
+
+.logo-container {
+  @apply flex-shrink-0;
+}
+
+.corporate-logo {
+  @apply w-32 sm:w-40 h-20 sm:h-24 bg-gray-50 border border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-600;
+}
+
+.corporate-logo .logo-icon {
+  @apply text-2xl sm:text-3xl mb-2;
+}
+
+.corporate-logo .logo-text {
+  @apply text-sm font-semibold;
+}
+
+.invoice-info {
+  @apply text-center sm:text-right;
+}
+
+.corporate-title {
+  @apply text-4xl sm:text-5xl font-bold text-gray-900 mb-2;
+}
+
+.corporate-number {
+  @apply text-xl sm:text-2xl text-gray-600;
+}
+
+.header-divider {
+  @apply h-1 bg-gray-900;
+}
+
+.corporate-details {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8;
+}
+
+.company-section .company-name {
+  @apply text-xl sm:text-2xl font-bold text-gray-900 mb-4;
+}
+
+.company-info {
+  @apply space-y-1;
+}
+
+.invoice-meta {
+  @apply space-y-3;
+}
+
+.meta-row {
+  @apply flex justify-between items-center;
+}
+
+.meta-label {
+  @apply font-bold text-gray-700;
+}
+
+.meta-value {
+  @apply text-gray-600 text-base sm:text-lg;
+}
+
+.corporate .client-section {
+  @apply mb-6 sm:mb-8;
+}
+
+.client-header {
+  @apply mb-4;
+}
+
+.corporate .client-title {
+  @apply font-bold text-gray-900 text-base sm:text-lg uppercase tracking-wide border-b border-gray-300 pb-2;
+}
+
+.corporate-table {
+  @apply border border-gray-300;
+}
+
+.corporate-header-row {
+  @apply bg-gray-900 text-white;
+}
+
+.corporate-header-row .item-cell {
+  @apply py-3 sm:py-4 font-bold text-sm uppercase tracking-wide;
+}
+
+.corporate-table .item-row {
+  @apply border-b border-gray-200;
+}
+
+.corporate-table .item-row .item-cell {
+  @apply py-3 sm:py-4;
+}
+
+.corporate-totals {
+  @apply w-full sm:w-80 ml-auto;
+}
+
+.subtotal-section {
+  @apply bg-gray-50 p-4 sm:p-6 space-y-3;
+}
+
+.final-total-section {
+  @apply bg-gray-900 text-white p-4 sm:p-6;
+}
+
+.final-total-section .total-line {
+  @apply text-xl sm:text-2xl font-bold;
+}
+
+.corporate-notes {
+  @apply border-t-2 border-gray-900 pt-6;
+}
+
+.corporate-notes .notes-title {
+  @apply font-bold text-gray-900 text-base sm:text-lg uppercase tracking-wide mb-4;
+}
+
+/* Minimal Template Styles */
+.minimal .minimal-header {
+  @apply border-b border-gray-200 pb-4 mb-6;
+}
+
+.minimal-title {
+  @apply text-2xl font-light text-gray-900 mb-1;
+}
+
+.minimal-number {
+  @apply text-gray-600;
+}
+
+.minimal-info {
+  @apply grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6;
+}
+
+.minimal-table {
+  @apply border-collapse;
+}
+
+.minimal-header-row {
+  @apply border-b border-gray-300;
+}
+
+.minimal-header-row .item-cell {
+  @apply font-medium text-gray-700 pb-2;
+}
+
+.minimal-totals {
+  @apply w-full sm:w-64 ml-auto space-y-2 border-t border-gray-200 pt-4;
+}
+
+.minimal-notes {
+  @apply border-t border-gray-200 pt-4 mt-6;
+}
+
+/* Elegant Template Styles */
+.elegant .elegant-header {
+  @apply flex items-center justify-center mb-8 space-x-4;
+}
+
+.header-line {
+  @apply flex-1 h-px bg-gray-300;
+}
+
+.elegant-title {
+  @apply text-3xl font-light text-gray-900 mb-1;
+}
+
+.elegant-number {
+  @apply text-gray-600;
+}
+
+.elegant-info {
+  @apply grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8;
+}
+
+.elegant-table {
+  @apply border-collapse;
+}
+
+.elegant-header-row {
+  @apply border-b-2 border-gray-300;
+}
+
+.elegant-header-row .item-cell {
+  @apply font-medium text-gray-700 pb-3;
+}
+
+.elegant-totals {
+  @apply w-full sm:w-64 ml-auto space-y-2 border-t-2 border-gray-300 pt-4;
+}
+
+.elegant-notes {
+  @apply border-t border-gray-200 pt-6 mt-8;
+}
+
+/* Construction Template Styles */
+.construction .construction-header {
+  @apply bg-gradient-to-r from-gray-800 to-black p-6 rounded-lg text-white mb-8 relative overflow-hidden;
+}
+
+.header-accent {
+  @apply absolute top-0 left-0 w-2 h-full bg-gray-400;
+}
+
+.construction-title {
+  @apply text-3xl font-bold mb-2;
+}
+
+.construction-number {
+  @apply text-gray-300 text-lg;
+}
+
+.construction-icon {
+  @apply absolute top-4 right-4 text-4xl opacity-20;
+}
+
+.construction-info {
+  @apply grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8;
+}
+
+.contractor-section .section-title {
+  @apply text-gray-900 font-bold mb-3 uppercase tracking-wide;
+}
+
+.project-dates {
+  @apply space-y-3;
+}
+
+.items-title {
+  @apply text-lg font-bold text-gray-900 mb-4 uppercase tracking-wide;
+}
+
+.construction-table {
+  @apply border-2 border-gray-900;
+}
+
+.construction-header-row {
+  @apply bg-gray-900 text-white;
+}
+
+.construction-header-row .item-cell {
+  @apply py-3 font-bold uppercase tracking-wide;
+}
+
+.construction-totals {
+  @apply w-full sm:w-80 ml-auto border-2 border-gray-900 p-6;
+}
+
+.construction-totals .final {
+  @apply text-xl font-bold border-t-2 border-gray-900 pt-3 text-gray-900;
+}
+
+.construction-notes {
+  @apply bg-gray-50 p-4 rounded-lg border-l-4 border-gray-900;
+}
+
+.construction-notes .notes-title {
+  @apply font-bold text-gray-900 mb-3 uppercase tracking-wide;
+}
+
+/* Construction Pro Template Styles */
+.construction-pro .construction-pro-header {
+  @apply flex items-center justify-between mb-8 p-6 bg-gradient-to-r from-gray-800 to-black rounded-lg text-white relative;
+}
+
+.construction-logo {
+  @apply w-20 h-16 bg-white bg-opacity-20 rounded-lg flex flex-col items-center justify-center text-white;
+}
+
+.construction-pro-title {
+  @apply text-2xl font-bold mb-1;
+}
+
+.construction-pro-number {
+  @apply text-gray-300;
+}
+
+.construction-pro-info {
+  @apply grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8;
+}
+
+.construction-pro-table {
+  @apply border-2 border-gray-900;
+}
+
+.construction-pro-header-row {
+  @apply bg-gray-900 text-white;
+}
+
+.construction-pro-header-row .item-cell {
+  @apply py-4 font-bold text-sm uppercase tracking-wide;
+}
+
+.construction-pro-totals {
+  @apply w-full sm:w-80 ml-auto;
+}
+
+.construction-pro-totals .subtotal-section {
+  @apply bg-gray-50 p-6 space-y-3;
+}
+
+.construction-pro-totals .final-total-section {
+  @apply bg-gray-900 text-white p-6;
+}
+
+.construction-pro-totals .final-total-section .total-line {
+  @apply text-xl font-bold;
+}
+
+.construction-pro-notes {
+  @apply bg-gray-50 p-6 rounded-lg border-l-4 border-gray-900;
+}
+
+.construction-pro-notes .notes-title {
+  @apply font-bold text-gray-900 text-lg uppercase tracking-wide mb-4;
+}
+
+/* Supplier Template Styles */
+.supplier .supplier-header {
+  @apply bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg text-white mb-8 relative;
+}
+
+.supplier-title {
+  @apply text-3xl font-bold mb-2;
+}
+
+.supplier-number {
+  @apply text-gray-300 text-lg;
+}
+
+.supplier-info {
+  @apply grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8;
+}
+
+.supplier-section .section-title {
+  @apply text-gray-900 font-bold mb-3 uppercase tracking-wide;
+}
+
+.supplier-table {
+  @apply border-2 border-gray-900;
+}
+
+.supplier-header-row {
+  @apply bg-gray-900 text-white;
+}
+
+.supplier-header-row .item-cell {
+  @apply py-3 font-bold uppercase tracking-wide;
+}
+
+.supplier-totals {
+  @apply w-full sm:w-80 ml-auto border-2 border-gray-900 p-6;
+}
+
+.supplier-totals .final {
+  @apply text-xl font-bold border-t-2 border-gray-900 pt-3 text-gray-900;
+}
+
+.supplier-notes {
+  @apply bg-gray-50 p-4 rounded-lg border-l-4 border-gray-900;
+}
+
+.supplier-notes .notes-title {
+  @apply font-bold text-gray-900 mb-3 uppercase tracking-wide;
+}
+
+/* Supplier Pro Template Styles */
+.supplier-pro .supplier-pro-header {
+  @apply flex items-center justify-between mb-8 p-6 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg text-white;
+}
+
+.supplier-logo {
+  @apply w-20 h-16 bg-white bg-opacity-20 rounded-lg flex flex-col items-center justify-center text-white;
+}
+
+.supplier-pro-title {
+  @apply text-2xl font-bold mb-1;
+}
+
+.supplier-pro-number {
+  @apply text-gray-300;
+}
+
+.supplier-pro-info {
+  @apply grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8;
+}
+
+.supplier-pro-table {
+  @apply border-2 border-gray-900;
+}
+
+.supplier-pro-header-row {
+  @apply bg-gray-900 text-white;
+}
+
+.supplier-pro-header-row .item-cell {
+  @apply py-4 font-bold text-sm uppercase tracking-wide;
+}
+
+.supplier-pro-totals {
+  @apply w-full sm:w-80 ml-auto;
+}
+
+.supplier-pro-totals .subtotal-section {
+  @apply bg-gray-50 p-6 space-y-3;
+}
+
+.supplier-pro-totals .final-total-section {
+  @apply bg-gray-900 text-white p-6;
+}
+
+.supplier-pro-totals .final-total-section .total-line {
+  @apply text-xl font-bold;
+}
+
+.supplier-pro-notes {
+  @apply bg-gray-50 p-6 rounded-lg border-l-4 border-gray-900;
+}
+
+.supplier-pro-notes .notes-title {
+  @apply font-bold text-gray-900 text-lg uppercase tracking-wide mb-4;
+}
+
+/* Mechanic Template Styles */
+.mechanic .mechanic-header {
+  @apply bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg text-white mb-8 relative;
+}
+
+.mechanic-title {
+  @apply text-3xl font-bold mb-2;
+}
+
+.mechanic-number {
+  @apply text-gray-300 text-lg;
+}
+
+.mechanic-icon {
+  @apply absolute top-4 right-4 text-4xl opacity-20;
+}
+
+.mechanic-info {
+  @apply grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8;
+}
+
+.mechanic-section .section-title {
+  @apply text-gray-900 font-bold mb-3 uppercase tracking-wide;
+}
+
+.mechanic-table {
+  @apply border-2 border-gray-900;
+}
+
+.mechanic-header-row {
+  @apply bg-gray-900 text-white;
+}
+
+.mechanic-header-row .item-cell {
+  @apply py-3 font-bold uppercase tracking-wide;
+}
+
+.mechanic-totals {
+  @apply w-full sm:w-80 ml-auto border-2 border-gray-900 p-6;
+}
+
+.mechanic-totals .final {
+  @apply text-xl font-bold border-t-2 border-gray-900 pt-3 text-gray-900;
+}
+
+.mechanic-notes {
+  @apply bg-gray-50 p-4 rounded-lg border-l-4 border-gray-900;
+}
+
+.mechanic-notes .notes-title {
+  @apply font-bold text-gray-900 mb-3 uppercase tracking-wide;
+}
+
+/* Mechanic Pro Template Styles */
+.mechanic-pro .mechanic-pro-header {
+  @apply flex items-center justify-between mb-8 p-6 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg text-white;
+}
+
+.mechanic-logo {
+  @apply w-20 h-16 bg-white bg-opacity-20 rounded-lg flex flex-col items-center justify-center text-white;
+}
+
+.mechanic-pro-title {
+  @apply text-2xl font-bold mb-1;
+}
+
+.mechanic-pro-number {
+  @apply text-gray-300;
+}
+
+.mechanic-pro-info {
+  @apply grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8;
+}
+
+.mechanic-pro-table {
+  @apply border-2 border-gray-900;
+}
+
+.mechanic-pro-header-row {
+  @apply bg-gray-900 text-white;
+}
+
+.mechanic-pro-header-row .item-cell {
+  @apply py-4 font-bold text-sm uppercase tracking-wide;
+}
+
+.mechanic-pro-totals {
+  @apply w-full sm:w-80 ml-auto;
+}
+
+.mechanic-pro-totals .subtotal-section {
+  @apply bg-gray-50 p-6 space-y-3;
+}
+
+.mechanic-pro-totals .final-total-section {
+  @apply bg-gray-900 text-white p-6;
+}
+
+.mechanic-pro-totals .final-total-section .total-line {
+  @apply text-xl font-bold;
+}
+
+.mechanic-pro-notes {
+  @apply bg-gray-50 p-6 rounded-lg border-l-4 border-gray-900;
+}
+
+.mechanic-pro-notes .notes-title {
+  @apply font-bold text-gray-900 text-lg uppercase tracking-wide mb-4;
+}

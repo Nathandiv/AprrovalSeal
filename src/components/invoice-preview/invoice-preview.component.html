@@ -1,0 +1,1274 @@
+<div class="preview-container">
+  <!-- Preview Header -->
+  <div class="preview-header">
+    <div class="flex items-center justify-between">
+      <h2 class="preview-title">Invoice Preview</h2>
+      <div *ngIf="selectedTemplate" class="template-badge">
+        {{ selectedTemplate.name }}
+        <span *ngIf="selectedTemplate.hasLogo" class="ml-1 text-xs">• Logo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invoice Preview -->
+  <div id="invoice-preview" class="invoice-preview" [ngClass]="getTemplateClass()">
+    <!-- Classic Template -->
+    <div *ngIf="!selectedTemplate || selectedTemplate.id === 'classic'" class="template-content">
+      <div class="invoice-header">
+        <div class="header-left">
+          <h1 class="invoice-title">INVOICE</h1>
+          <p class="invoice-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+        <div class="header-right">
+          <h2 class="company-name">{{ invoice.companyName || 'Your Company Name' }}</h2>
+          <div class="company-details">
+            <p>{{ invoice.companyAddress || 'Company Address' }}</p>
+            <p>{{ invoice.companyEmail || 'email@company.com' }}</p>
+            <p>{{ invoice.companyPhone || '+27 11 123 4567' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="invoice-info">
+        <div>
+          <h3 class="info-title">Bill To:</h3>
+          <div class="client-name">{{ invoice.clientName || 'Client Name' }}</div>
+          <div class="client-details">
+            <p>{{ invoice.clientAddress || 'Client Address' }}</p>
+            <p>{{ invoice.clientEmail || 'client@email.com' }}</p>
+          </div>
+        </div>
+        <div class="dates">
+          <div class="date-row">
+            <span class="date-label">Issue Date:</span>
+            <span>{{ invoice.date || '2025-01-01' }}</span>
+          </div>
+          <div class="date-row">
+            <span class="date-label">Due Date:</span>
+            <span>{{ invoice.dueDate || '2025-01-31' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table">
+        <table class="w-full">
+          <thead class="items-header">
+            <tr>
+              <th class="item-cell">Description</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row">
+              <td class="item-cell">{{ item.description || 'Item description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-line">
+            <span>Subtotal:</span>
+            <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line">
+            <span>VAT ({{ invoice.taxRate }}%):</span>
+            <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line final">
+            <span>Total:</span>
+            <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="notes-section">
+        <h3 class="notes-title">Notes</h3>
+        <p class="notes-content">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Modern Template -->
+    <div *ngIf="selectedTemplate?.id === 'modern'" class="template-content modern">
+      <div class="modern-header">
+        <h1 class="modern-title">INVOICE</h1>
+        <p class="modern-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+      </div>
+
+      <div class="modern-info">
+        <div class="modern-company">
+          <h2 class="company-name">{{ invoice.companyName || 'Your Company Name' }}</h2>
+          <div class="company-details">
+            <p>{{ invoice.companyAddress || 'Company Address' }}</p>
+            <p>{{ invoice.companyEmail || 'email@company.com' }}</p>
+            <p>{{ invoice.companyPhone || '+27 11 123 4567' }}</p>
+          </div>
+        </div>
+        <div class="modern-client">
+          <div class="dates-box">
+            <div class="date-row">
+              <span class="date-label">Issue Date:</span>
+              <span>{{ invoice.date || '2025-01-01' }}</span>
+            </div>
+            <div class="date-row">
+              <span class="date-label">Due Date:</span>
+              <span>{{ invoice.dueDate || '2025-01-31' }}</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="client-title">Bill To</h3>
+            <div class="client-name">{{ invoice.clientName || 'Client Name' }}</div>
+            <div class="client-details">
+              <p>{{ invoice.clientAddress || 'Client Address' }}</p>
+              <p>{{ invoice.clientEmail || 'client@email.com' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table modern-table">
+        <table class="w-full">
+          <thead class="modern-header-row">
+            <tr>
+              <th class="item-cell">Description</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row">
+              <td class="item-cell">{{ item.description || 'Item description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="modern-totals">
+          <div class="total-line">
+            <span>Subtotal:</span>
+            <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line">
+            <span>VAT ({{ invoice.taxRate }}%):</span>
+            <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line final">
+            <span>Total:</span>
+            <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="notes-section">
+        <h3 class="notes-title">Notes</h3>
+        <p class="notes-content">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Professional Template -->
+    <div *ngIf="selectedTemplate?.id === 'professional'" class="template-content professional">
+      <div class="professional-header">
+        <div>
+          <h1 class="professional-title">INVOICE</h1>
+          <p class="professional-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+        <div class="header-company">
+          <h2 class="company-name">{{ invoice.companyName || 'Your Company Name' }}</h2>
+          <div class="company-details">
+            <p>{{ invoice.companyAddress || 'Company Address' }}</p>
+            <p>{{ invoice.companyEmail || 'email@company.com' }}</p>
+            <p>{{ invoice.companyPhone || '+27 11 123 4567' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="professional-info">
+        <div class="company-box">
+          <h3 class="box-title">From</h3>
+          <div class="box-content">
+            <div class="font-medium">{{ invoice.companyName || 'Your Company Name' }}</div>
+            <div>{{ invoice.companyAddress || 'Company Address' }}</div>
+            <div>{{ invoice.companyEmail || 'email@company.com' }}</div>
+            <div>{{ invoice.companyPhone || '+27 11 123 4567' }}</div>
+          </div>
+        </div>
+        <div class="client-section">
+          <div class="client-box">
+            <h3 class="box-title">Bill To</h3>
+            <div class="box-content">
+              <div class="font-medium">{{ invoice.clientName || 'Client Name' }}</div>
+              <div>{{ invoice.clientAddress || 'Client Address' }}</div>
+              <div>{{ invoice.clientEmail || 'client@email.com' }}</div>
+            </div>
+          </div>
+          <div class="dates-grid">
+            <div class="date-box">
+              <div class="date-label">Issue Date</div>
+              <div class="date-value">{{ invoice.date || '2025-01-01' }}</div>
+            </div>
+            <div class="date-box">
+              <div class="date-label">Due Date</div>
+              <div class="date-value">{{ invoice.dueDate || '2025-01-31' }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table professional-table">
+        <table class="w-full">
+          <thead class="professional-header-row">
+            <tr>
+              <th class="item-cell">Description</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row">
+              <td class="item-cell">{{ item.description || 'Item description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="professional-totals">
+          <div class="totals-content">
+            <div class="total-line">
+              <span>Subtotal:</span>
+              <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+            <div class="total-line">
+              <span>VAT ({{ invoice.taxRate }}%):</span>
+              <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+          <div class="final-total">
+            <div class="total-line">
+              <span>Total:</span>
+              <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="professional-notes">
+        <h3 class="notes-title">Notes</h3>
+        <p class="notes-content">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Creative Template -->
+    <div *ngIf="selectedTemplate?.id === 'creative'" class="template-content creative">
+      <div class="creative-header">
+        <div>
+          <h1 class="creative-title">INVOICE</h1>
+          <p class="creative-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+        <div class="header-company">
+          <h2 class="company-name">{{ invoice.companyName || 'Your Company Name' }}</h2>
+        </div>
+      </div>
+
+      <div class="creative-info">
+        <div class="from-box">
+          <h3 class="box-title">From</h3>
+          <div class="box-content">
+            <div class="font-medium">{{ invoice.companyName || 'Your Company Name' }}</div>
+            <div>{{ invoice.companyAddress || 'Company Address' }}</div>
+            <div>{{ invoice.companyEmail || 'email@company.com' }}</div>
+            <div>{{ invoice.companyPhone || '+27 11 123 4567' }}</div>
+          </div>
+        </div>
+        <div class="to-section">
+          <div class="to-box">
+            <h3 class="box-title">To</h3>
+            <div class="box-content">
+              <div class="font-medium">{{ invoice.clientName || 'Client Name' }}</div>
+              <div>{{ invoice.clientAddress || 'Client Address' }}</div>
+              <div>{{ invoice.clientEmail || 'client@email.com' }}</div>
+            </div>
+          </div>
+          <div class="dates-grid">
+            <div class="date-box">
+              <div class="date-label">Issue Date</div>
+              <div class="date-value">{{ invoice.date || '2025-01-01' }}</div>
+            </div>
+            <div class="date-box">
+              <div class="date-label">Due Date</div>
+              <div class="date-value">{{ invoice.dueDate || '2025-01-31' }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table creative-table">
+        <table class="w-full">
+          <thead class="creative-header-row">
+            <tr>
+              <th class="item-cell">Description</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items; let i = index" class="item-row" [class.even]="i % 2 === 0" [class.odd]="i % 2 === 1">
+              <td class="item-cell">{{ item.description || 'Item description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="creative-totals">
+          <div class="totals-content">
+            <div class="total-line">
+              <span>Subtotal:</span>
+              <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+            <div class="total-line">
+              <span>VAT ({{ invoice.taxRate }}%):</span>
+              <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+          <div class="final-total">
+            <div class="total-line">
+              <span>Total:</span>
+              <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="creative-notes">
+        <h3 class="notes-title">Notes</h3>
+        <p class="notes-content">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Branded Templates (Left & Right) -->
+    <div *ngIf="selectedTemplate?.id === 'branded-left' || selectedTemplate?.id === 'branded-right'" class="template-content branded" [class.branded-right]="selectedTemplate?.id === 'branded-right'">
+      <div class="branded-header" [class.branded-header-right]="selectedTemplate?.id === 'branded-right'">
+        <div class="logo-section" *ngIf="shouldShowLogoPlaceholder() || hasLogo()">
+          <div *ngIf="hasLogo()" class="logo-container">
+            <img [src]="getLogoUrl()" alt="Company Logo" class="w-24 sm:w-32 h-16 sm:h-20 object-contain" />
+          </div>
+          <div *ngIf="shouldShowLogoPlaceholder()" class="logo-placeholder">
+            <div class="logo-icon">🏢</div>
+            <div class="logo-text">LOGO</div>
+          </div>
+        </div>
+        <div class="header-info">
+          <h1 class="branded-title">INVOICE</h1>
+          <p class="branded-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+      </div>
+
+      <div class="branded-company">
+        <h2 class="company-name">{{ invoice.companyName || 'Your Company Name' }}</h2>
+        <div class="company-details">
+          <p>{{ invoice.companyAddress || 'Company Address' }}</p>
+          <p>{{ invoice.companyEmail || 'email@company.com' }}</p>
+          <p>{{ invoice.companyPhone || '+27 11 123 4567' }}</p>
+        </div>
+      </div>
+
+      <div class="branded-info">
+        <div>
+          <h3 class="section-title">Bill To</h3>
+          <div class="client-name">{{ invoice.clientName || 'Client Name' }}</div>
+          <div class="client-details">
+            <p>{{ invoice.clientAddress || 'Client Address' }}</p>
+            <p>{{ invoice.clientEmail || 'client@email.com' }}</p>
+          </div>
+        </div>
+        <div class="dates-section">
+          <div class="date-item">
+            <div class="date-label">Issue Date</div>
+            <div class="date-value">{{ invoice.date || '2025-01-01' }}</div>
+          </div>
+          <div class="date-item">
+            <div class="date-label">Due Date</div>
+            <div class="date-value">{{ invoice.dueDate || '2025-01-31' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table branded-table">
+        <table class="w-full">
+          <thead class="branded-header-row">
+            <tr>
+              <th class="item-cell">Description</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row">
+              <td class="item-cell">{{ item.description || 'Item description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="branded-totals">
+          <div class="total-line">
+            <span>Subtotal:</span>
+            <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line">
+            <span>VAT ({{ invoice.taxRate }}%):</span>
+            <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line final">
+            <span>Total:</span>
+            <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="notes-section">
+        <h3 class="notes-title">Notes</h3>
+        <p class="notes-content">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Corporate Template -->
+    <div *ngIf="selectedTemplate?.id === 'corporate'" class="template-content corporate">
+      <div class="corporate-header">
+        <div class="header-top">
+          <div class="logo-container" *ngIf="shouldShowLogoPlaceholder() || hasLogo()">
+            <div *ngIf="hasLogo()" class="logo-container">
+              <img [src]="getLogoUrl()" alt="Company Logo" class="w-32 sm:w-40 h-20 sm:h-24 object-contain" />
+            </div>
+            <div *ngIf="shouldShowLogoPlaceholder()" class="corporate-logo">
+              <div class="logo-icon">🏢</div>
+              <div class="logo-text">LOGO</div>
+            </div>
+          </div>
+          <div class="invoice-info">
+            <h1 class="corporate-title">INVOICE</h1>
+            <p class="corporate-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+          </div>
+        </div>
+        <div class="header-divider"></div>
+      </div>
+
+      <div class="corporate-details">
+        <div class="company-section">
+          <h2 class="company-name">{{ invoice.companyName || 'Your Company Name' }}</h2>
+          <div class="company-info">
+            <p>{{ invoice.companyAddress || 'Company Address' }}</p>
+            <p>{{ invoice.companyEmail || 'email@company.com' }}</p>
+            <p>{{ invoice.companyPhone || '+27 11 123 4567' }}</p>
+          </div>
+        </div>
+        <div class="invoice-meta">
+          <div class="meta-row">
+            <span class="meta-label">Issue Date:</span>
+            <span class="meta-value">{{ invoice.date || '2025-01-01' }}</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Due Date:</span>
+            <span class="meta-value">{{ invoice.dueDate || '2025-01-31' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="client-section">
+        <div class="client-header">
+          <h3 class="client-title">Bill To</h3>
+        </div>
+        <div class="client-name">{{ invoice.clientName || 'Client Name' }}</div>
+        <div class="client-details">
+          <p>{{ invoice.clientAddress || 'Client Address' }}</p>
+          <p>{{ invoice.clientEmail || 'client@email.com' }}</p>
+        </div>
+      </div>
+
+      <div class="items-table corporate-table">
+        <table class="w-full">
+          <thead class="corporate-header-row">
+            <tr>
+              <th class="item-cell">Description</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row">
+              <td class="item-cell">{{ item.description || 'Item description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="corporate-totals">
+          <div class="subtotal-section">
+            <div class="total-line">
+              <span>Subtotal:</span>
+              <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+            <div class="total-line">
+              <span>VAT ({{ invoice.taxRate }}%):</span>
+              <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+          <div class="final-total-section">
+            <div class="total-line">
+              <span>Total:</span>
+              <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="corporate-notes">
+        <h3 class="notes-title">Notes</h3>
+        <p class="notes-content">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Minimal Template -->
+    <div *ngIf="selectedTemplate?.id === 'minimal'" class="template-content minimal">
+      <div class="minimal-header">
+        <h1 class="minimal-title">Invoice</h1>
+        <p class="minimal-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+      </div>
+
+      <div class="minimal-info">
+        <div>
+          <h3 class="font-medium text-gray-900 mb-2">From</h3>
+          <div class="text-gray-700">
+            <div class="font-medium">{{ invoice.companyName || 'Your Company Name' }}</div>
+            <div>{{ invoice.companyAddress || 'Company Address' }}</div>
+            <div>{{ invoice.companyEmail || 'email@company.com' }}</div>
+            <div>{{ invoice.companyPhone || '+27 11 123 4567' }}</div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-medium text-gray-900 mb-2">To</h3>
+          <div class="text-gray-700">
+            <div class="font-medium">{{ invoice.clientName || 'Client Name' }}</div>
+            <div>{{ invoice.clientAddress || 'Client Address' }}</div>
+            <div>{{ invoice.clientEmail || 'client@email.com' }}</div>
+          </div>
+        </div>
+        <div>
+          <div class="space-y-1">
+            <div class="flex justify-between">
+              <span class="font-medium">Issue Date:</span>
+              <span>{{ invoice.date || '2025-01-01' }}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium">Due Date:</span>
+              <span>{{ invoice.dueDate || '2025-01-31' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table minimal-table">
+        <table class="w-full">
+          <thead class="minimal-header-row">
+            <tr>
+              <th class="item-cell">Description</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row border-b border-gray-100">
+              <td class="item-cell py-2">{{ item.description || 'Item description' }}</td>
+              <td class="item-cell py-2">{{ item.quantity || 1 }}</td>
+              <td class="item-cell py-2">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell py-2">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="minimal-totals">
+          <div class="total-line">
+            <span>Subtotal:</span>
+            <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line">
+            <span>VAT ({{ invoice.taxRate }}%):</span>
+            <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line final font-bold">
+            <span>Total:</span>
+            <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="minimal-notes">
+        <h3 class="font-medium text-gray-900 mb-2">Notes</h3>
+        <p class="text-gray-700">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Elegant Template -->
+    <div *ngIf="selectedTemplate?.id === 'elegant'" class="template-content elegant">
+      <div class="elegant-header">
+        <div class="header-line"></div>
+        <div class="text-center">
+          <h1 class="elegant-title">Invoice</h1>
+          <p class="elegant-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+        <div class="header-line"></div>
+      </div>
+
+      <div class="elegant-info">
+        <div>
+          <h3 class="font-medium text-gray-900 mb-3">From</h3>
+          <div class="text-gray-700">
+            <div class="font-medium">{{ invoice.companyName || 'Your Company Name' }}</div>
+            <div>{{ invoice.companyAddress || 'Company Address' }}</div>
+            <div>{{ invoice.companyEmail || 'email@company.com' }}</div>
+            <div>{{ invoice.companyPhone || '+27 11 123 4567' }}</div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-medium text-gray-900 mb-3">To</h3>
+          <div class="text-gray-700">
+            <div class="font-medium">{{ invoice.clientName || 'Client Name' }}</div>
+            <div>{{ invoice.clientAddress || 'Client Address' }}</div>
+            <div>{{ invoice.clientEmail || 'client@email.com' }}</div>
+          </div>
+        </div>
+        <div>
+          <div class="space-y-2">
+            <div class="flex justify-between">
+              <span class="font-medium">Issue Date:</span>
+              <span>{{ invoice.date || '2025-01-01' }}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium">Due Date:</span>
+              <span>{{ invoice.dueDate || '2025-01-31' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table elegant-table">
+        <table class="w-full">
+          <thead class="elegant-header-row">
+            <tr>
+              <th class="item-cell">Description</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row border-b border-gray-100">
+              <td class="item-cell py-3">{{ item.description || 'Item description' }}</td>
+              <td class="item-cell py-3">{{ item.quantity || 1 }}</td>
+              <td class="item-cell py-3">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell py-3">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="elegant-totals">
+          <div class="total-line">
+            <span>Subtotal:</span>
+            <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line">
+            <span>VAT ({{ invoice.taxRate }}%):</span>
+            <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line final font-bold text-lg">
+            <span>Total:</span>
+            <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="elegant-notes">
+        <h3 class="font-medium text-gray-900 mb-3">Notes</h3>
+        <p class="text-gray-700">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Construction Template -->
+    <div *ngIf="selectedTemplate?.id === 'construction'" class="template-content construction">
+      <div class="construction-header">
+        <div class="header-accent"></div>
+        <div>
+          <h1 class="construction-title">CONSTRUCTION INVOICE</h1>
+          <p class="construction-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+        <div class="construction-icon">🏗️</div>
+      </div>
+
+      <div class="construction-info">
+        <div class="contractor-section">
+          <h3 class="section-title">Contractor</h3>
+          <div class="text-white">
+            <div class="font-bold">{{ invoice.companyName || 'Your Construction Company' }}</div>
+            <div>{{ invoice.companyAddress || 'Company Address' }}</div>
+            <div>{{ invoice.companyEmail || 'email@company.com' }}</div>
+            <div>{{ invoice.companyPhone || '+27 11 123 4567' }}</div>
+          </div>
+        </div>
+        <div>
+          <h3 class="section-title">Client</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.clientName || 'Client Name' }}</div>
+            <div>{{ invoice.clientAddress || 'Client Address' }}</div>
+            <div>{{ invoice.clientEmail || 'client@email.com' }}</div>
+          </div>
+        </div>
+        <div class="project-dates">
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Issue Date</div>
+            <div class="text-gray-600">{{ invoice.date || '2025-01-01' }}</div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Due Date</div>
+            <div class="text-gray-600">{{ invoice.dueDate || '2025-01-31' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="items-title">Work Performed</h3>
+        <div class="items-table construction-table">
+          <table class="w-full">
+            <thead class="construction-header-row">
+              <tr>
+                <th class="item-cell">Description</th>
+                <th class="item-cell">Qty</th>
+                <th class="item-cell">Rate</th>
+                <th class="item-cell">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of invoice.items" class="item-row border-b border-gray-200">
+                <td class="item-cell">{{ item.description || 'Construction work description' }}</td>
+                <td class="item-cell">{{ item.quantity || 1 }}</td>
+                <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+                <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="totals-section">
+        <div class="construction-totals">
+          <div class="total-line">
+            <span>Subtotal:</span>
+            <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line">
+            <span>VAT ({{ invoice.taxRate }}%):</span>
+            <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line final">
+            <span>Total Amount Due:</span>
+            <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="construction-notes">
+        <h3 class="notes-title">Project Notes</h3>
+        <p class="text-gray-700">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Construction Pro Template -->
+    <div *ngIf="selectedTemplate?.id === 'construction-pro'" class="template-content construction-pro">
+      <div class="construction-pro-header">
+        <div class="construction-logo" *ngIf="shouldShowLogoPlaceholder() || hasLogo()">
+          <div *ngIf="hasLogo()">
+            <img [src]="getLogoUrl()" alt="Company Logo" class="w-20 h-16 object-contain" />
+          </div>
+          <div *ngIf="shouldShowLogoPlaceholder()" class="text-center">
+            <div class="text-2xl mb-1">🏗️</div>
+            <div class="text-xs font-bold">LOGO</div>
+          </div>
+        </div>
+        <div class="text-center">
+          <h1 class="construction-pro-title">CONSTRUCTION INVOICE</h1>
+          <p class="construction-pro-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+      </div>
+
+      <div class="construction-pro-info">
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wide">Contractor</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.companyName || 'Your Construction Company' }}</div>
+            <div>{{ invoice.companyAddress || 'Company Address' }}</div>
+            <div>{{ invoice.companyEmail || 'email@company.com' }}</div>
+            <div>{{ invoice.companyPhone || '+27 11 123 4567' }}</div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wide">Client</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.clientName || 'Client Name' }}</div>
+            <div>{{ invoice.clientAddress || 'Client Address' }}</div>
+            <div>{{ invoice.clientEmail || 'client@email.com' }}</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Issue Date</div>
+            <div class="text-gray-600">{{ invoice.date || '2025-01-01' }}</div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Due Date</div>
+            <div class="text-gray-600">{{ invoice.dueDate || '2025-01-31' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table construction-pro-table">
+        <table class="w-full">
+          <thead class="construction-pro-header-row">
+            <tr>
+              <th class="item-cell">Work Description</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row border-b border-gray-200">
+              <td class="item-cell">{{ item.description || 'Construction work description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="construction-pro-totals">
+          <div class="subtotal-section">
+            <div class="total-line">
+              <span>Subtotal:</span>
+              <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+            <div class="total-line">
+              <span>VAT ({{ invoice.taxRate }}%):</span>
+              <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+          <div class="final-total-section">
+            <div class="total-line">
+              <span>Total Amount Due:</span>
+              <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="construction-pro-notes">
+        <h3 class="notes-title">Project Notes</h3>
+        <p class="text-gray-700">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Supplier Template -->
+    <div *ngIf="selectedTemplate?.id === 'supplier'" class="template-content supplier">
+      <div class="supplier-header">
+        <div>
+          <h1 class="supplier-title">SUPPLIER INVOICE</h1>
+          <p class="supplier-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+      </div>
+
+      <div class="supplier-info">
+        <div class="supplier-section">
+          <h3 class="section-title">Supplier</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.companyName || 'Your Supply Company' }}</div>
+            <div>{{ invoice.companyAddress || 'Company Address' }}</div>
+            <div>{{ invoice.companyEmail || 'email@company.com' }}</div>
+            <div>{{ invoice.companyPhone || '+27 11 123 4567' }}</div>
+          </div>
+        </div>
+        <div>
+          <h3 class="section-title">Customer</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.clientName || 'Customer Name' }}</div>
+            <div>{{ invoice.clientAddress || 'Customer Address' }}</div>
+            <div>{{ invoice.clientEmail || 'customer@email.com' }}</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Invoice Date</div>
+            <div class="text-gray-600">{{ invoice.date || '2025-01-01' }}</div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Payment Due</div>
+            <div class="text-gray-600">{{ invoice.dueDate || '2025-01-31' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table supplier-table">
+        <table class="w-full">
+          <thead class="supplier-header-row">
+            <tr>
+              <th class="item-cell">Product/Service</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Unit Price</th>
+              <th class="item-cell">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row border-b border-gray-200">
+              <td class="item-cell">{{ item.description || 'Product or service description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="supplier-totals">
+          <div class="total-line">
+            <span>Subtotal:</span>
+            <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line">
+            <span>VAT ({{ invoice.taxRate }}%):</span>
+            <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line final">
+            <span>Total Amount:</span>
+            <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="supplier-notes">
+        <h3 class="notes-title">Delivery Notes</h3>
+        <p class="text-gray-700">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Supplier Pro Template -->
+    <div *ngIf="selectedTemplate?.id === 'supplier-pro'" class="template-content supplier-pro">
+      <div class="supplier-pro-header">
+        <div class="supplier-logo" *ngIf="shouldShowLogoPlaceholder() || hasLogo()">
+          <div *ngIf="hasLogo()">
+            <img [src]="getLogoUrl()" alt="Company Logo" class="w-20 h-16 object-contain" />
+          </div>
+          <div *ngIf="shouldShowLogoPlaceholder()" class="text-center">
+            <div class="text-2xl mb-1">📦</div>
+            <div class="text-xs font-bold">LOGO</div>
+          </div>
+        </div>
+        <div class="text-center">
+          <h1 class="supplier-pro-title">SUPPLIER INVOICE</h1>
+          <p class="supplier-pro-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+      </div>
+
+      <div class="supplier-pro-info">
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wide">Supplier</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.companyName || 'Your Supply Company' }}</div>
+            <div>{{ invoice.companyAddress || 'Company Address' }}</div>
+            <div>{{ invoice.companyEmail || 'email@company.com' }}</div>
+            <div>{{ invoice.companyPhone || '+27 11 123 4567' }}</div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wide">Customer</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.clientName || 'Customer Name' }}</div>
+            <div>{{ invoice.clientAddress || 'Customer Address' }}</div>
+            <div>{{ invoice.clientEmail || 'customer@email.com' }}</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Invoice Date</div>
+            <div class="text-gray-600">{{ invoice.date || '2025-01-01' }}</div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Payment Due</div>
+            <div class="text-gray-600">{{ invoice.dueDate || '2025-01-31' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table supplier-pro-table">
+        <table class="w-full">
+          <thead class="supplier-pro-header-row">
+            <tr>
+              <th class="item-cell">Product/Service</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Unit Price</th>
+              <th class="item-cell">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row border-b border-gray-200">
+              <td class="item-cell">{{ item.description || 'Product or service description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="supplier-pro-totals">
+          <div class="subtotal-section">
+            <div class="total-line">
+              <span>Subtotal:</span>
+              <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+            <div class="total-line">
+              <span>VAT ({{ invoice.taxRate }}%):</span>
+              <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+          <div class="final-total-section">
+            <div class="total-line">
+              <span>Total Amount:</span>
+              <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="supplier-pro-notes">
+        <h3 class="notes-title">Delivery Notes</h3>
+        <p class="text-gray-700">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Mechanic Template -->
+    <div *ngIf="selectedTemplate?.id === 'mechanic'" class="template-content mechanic">
+      <div class="mechanic-header">
+        <div>
+          <h1 class="mechanic-title">MECHANIC INVOICE</h1>
+          <p class="mechanic-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+        <div class="mechanic-icon">🔧</div>
+      </div>
+
+      <div class="mechanic-info">
+        <div class="mechanic-section">
+          <h3 class="section-title">Mechanic/Workshop</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.companyName || 'Your Mechanic Shop' }}</div>
+            <div>{{ invoice.companyAddress || 'Workshop Address' }}</div>
+            <div>{{ invoice.companyEmail || 'email@workshop.com' }}</div>
+            <div>{{ invoice.companyPhone || '+27 11 123 4567' }}</div>
+          </div>
+        </div>
+        <div>
+          <h3 class="section-title">Vehicle Owner</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.clientName || 'Vehicle Owner Name' }}</div>
+            <div>{{ invoice.clientAddress || 'Owner Address' }}</div>
+            <div>{{ invoice.clientEmail || 'owner@email.com' }}</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Service Date</div>
+            <div class="text-gray-600">{{ invoice.date || '2025-01-01' }}</div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Payment Due</div>
+            <div class="text-gray-600">{{ invoice.dueDate || '2025-01-31' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table mechanic-table">
+        <table class="w-full">
+          <thead class="mechanic-header-row">
+            <tr>
+              <th class="item-cell">Service/Part</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row border-b border-gray-200">
+              <td class="item-cell">{{ item.description || 'Service or part description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="mechanic-totals">
+          <div class="total-line">
+            <span>Subtotal:</span>
+            <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line">
+            <span>VAT ({{ invoice.taxRate }}%):</span>
+            <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="total-line final">
+            <span>Total Amount:</span>
+            <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="mechanic-notes">
+        <h3 class="notes-title">Service Notes</h3>
+        <p class="text-gray-700">{{ invoice.notes }}</p>
+      </div>
+    </div>
+
+    <!-- Mechanic Pro Template -->
+    <div *ngIf="selectedTemplate?.id === 'mechanic-pro'" class="template-content mechanic-pro">
+      <div class="mechanic-pro-header">
+        <div class="mechanic-logo" *ngIf="shouldShowLogoPlaceholder() || hasLogo()">
+          <div *ngIf="hasLogo()">
+            <img [src]="getLogoUrl()" alt="Company Logo" class="w-20 h-16 object-contain" />
+          </div>
+          <div *ngIf="shouldShowLogoPlaceholder()" class="text-center">
+            <div class="text-2xl mb-1">🔧</div>
+            <div class="text-xs font-bold">LOGO</div>
+          </div>
+        </div>
+        <div class="text-center">
+          <h1 class="mechanic-pro-title">MECHANIC INVOICE</h1>
+          <p class="mechanic-pro-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
+        </div>
+      </div>
+
+      <div class="mechanic-pro-info">
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wide">Mechanic/Workshop</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.companyName || 'Your Mechanic Shop' }}</div>
+            <div>{{ invoice.companyAddress || 'Workshop Address' }}</div>
+            <div>{{ invoice.companyEmail || 'email@workshop.com' }}</div>
+            <div>{{ invoice.companyPhone || '+27 11 123 4567' }}</div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wide">Vehicle Owner</h3>
+          <div class="text-gray-700">
+            <div class="font-bold">{{ invoice.clientName || 'Vehicle Owner Name' }}</div>
+            <div>{{ invoice.clientAddress || 'Owner Address' }}</div>
+            <div>{{ invoice.clientEmail || 'owner@email.com' }}</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Service Date</div>
+            <div class="text-gray-600">{{ invoice.date || '2025-01-01' }}</div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <div class="font-bold text-gray-700">Payment Due</div>
+            <div class="text-gray-600">{{ invoice.dueDate || '2025-01-31' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-table mechanic-pro-table">
+        <table class="w-full">
+          <thead class="mechanic-pro-header-row">
+            <tr>
+              <th class="item-cell">Service/Part</th>
+              <th class="item-cell">Qty</th>
+              <th class="item-cell">Rate</th>
+              <th class="item-cell">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items" class="item-row border-b border-gray-200">
+              <td class="item-cell">{{ item.description || 'Service or part description' }}</td>
+              <td class="item-cell">{{ item.quantity || 1 }}</td>
+              <td class="item-cell">{{ item.rate | currency:'ZAR':'symbol':'1.2-2' }}</td>
+              <td class="item-cell">{{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="mechanic-pro-totals">
+          <div class="subtotal-section">
+            <div class="total-line">
+              <span>Subtotal:</span>
+              <span>{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+            <div class="total-line">
+              <span>VAT ({{ invoice.taxRate }}%):</span>
+              <span>{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+          <div class="final-total-section">
+            <div class="total-line">
+              <span>Total Amount:</span>
+              <span>{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="invoice.notes" class="mechanic-pro-notes">
+        <h3 class="notes-title">Service Notes</h3>
+        <p class="text-gray-700">{{ invoice.notes }}</p>
+      </div>
+    </div>
+  </div>
+</div>

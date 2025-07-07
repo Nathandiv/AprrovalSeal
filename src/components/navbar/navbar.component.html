@@ -1,0 +1,105 @@
+<nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a routerLink="/" class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">AS</span>
+          </div>
+          <span class="text-2xl font-bold text-gray-900">ApprovalSeal</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-4">
+          <a 
+            routerLink="/" 
+            routerLinkActive="text-gray-900 border-b-2 border-gray-900"
+            [routerLinkActiveOptions]="{exact: true}"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200"
+          >
+            Home
+          </a>
+          <a 
+            routerLink="/about" 
+            routerLinkActive="text-gray-900 border-b-2 border-gray-900"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200"
+          >
+            About
+          </a>
+          <a 
+            routerLink="/contact" 
+            routerLinkActive="text-gray-900 border-b-2 border-gray-900"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200"
+          >
+            Contact
+          </a>
+          <a 
+            routerLink="/support" 
+            routerLinkActive="text-gray-900 border-b-2 border-gray-900"
+            class="text-amber-600 hover:text-amber-700 px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center space-x-1"
+          >
+            <span>☕</span>
+            <span>Support</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button
+          type="button"
+          (click)="toggleMenu()"
+          class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900 p-2"
+        >
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path *ngIf="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <path *ngIf="isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden" [class.hidden]="!isMenuOpen">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+        <a 
+          routerLink="/" 
+          routerLinkActive="text-gray-900 bg-gray-100"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="text-gray-600 hover:text-gray-900 hover:bg-gray-50 block px-3 py-2 text-base font-medium transition-colors duration-200"
+          (click)="toggleMenu()"
+        >
+          Home
+        </a>
+        <a 
+          routerLink="/about" 
+          routerLinkActive="text-gray-900 bg-gray-100"
+          class="text-gray-600 hover:text-gray-900 hover:bg-gray-50 block px-3 py-2 text-base font-medium transition-colors duration-200"
+          (click)="toggleMenu()"
+        >
+          About
+        </a>
+        <a 
+          routerLink="/contact" 
+          routerLinkActive="text-gray-900 bg-gray-100"
+          class="text-gray-600 hover:text-gray-900 hover:bg-gray-50 block px-3 py-2 text-base font-medium transition-colors duration-200"
+          (click)="toggleMenu()"
+        >
+          Contact
+        </a>
+        <a 
+          routerLink="/support" 
+          routerLinkActive="text-amber-700 bg-amber-50"
+          class="text-amber-600 hover:text-amber-700 hover:bg-amber-50 block px-3 py-2 text-base font-medium transition-colors duration-200 flex items-center space-x-1"
+          (click)="toggleMenu()"
+        >
+          <span>☕</span>
+          <span>Support</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

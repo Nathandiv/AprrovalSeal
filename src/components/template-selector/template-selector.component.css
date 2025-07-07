@@ -1,0 +1,68 @@
+.template-card {
+  @apply bg-white rounded-lg shadow-md border-2 border-gray-200 cursor-pointer transition-all duration-200 hover:shadow-lg hover:border-gray-300;
+}
+
+.template-card.selected {
+  @apply border-gray-900 shadow-lg;
+}
+
+.template-preview {
+  @apply aspect-[3/4] bg-gray-100 rounded-t-lg overflow-hidden relative;
+  height: 120px; /* Reduced height for medium size */
+}
+
+.template-image {
+  @apply  w-[105%] h-full object-cover -ml-[100%];
+}
+
+.logo-badge {
+  @apply absolute top-2 right-2 bg-gray-900 text-white text-xs px-2 py-1 rounded font-medium;
+}
+
+.category-badge {
+  @apply absolute top-2 left-2 text-xs px-2 py-1 rounded font-medium;
+}
+
+.category-badge.construction {
+  @apply bg-gray-900 text-white;
+}
+
+.category-badge.supplier {
+  @apply bg-blue-600 text-white;
+}
+
+.category-badge.mechanic {
+  @apply bg-red-600 text-white;
+}
+
+.template-info {
+  @apply p-3; /* Reduced padding */
+}
+
+.template-title {
+  @apply font-semibold text-gray-900 mb-1 text-sm; /* Smaller text and margin */
+}
+
+.template-description {
+  @apply text-xs text-gray-600 mb-2; /* Smaller text and margin */
+}
+
+.template-footer {
+  @apply flex items-center justify-between;
+}
+
+.template-tag {
+  @apply text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded;
+}
+
+.logo-tag {
+  @apply text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded;
+}
+
+.selection-indicator {
+  @apply w-4 h-4 rounded-full border-2 border-gray-300;
+}
+
+.selection-indicator.selected {
+  @apply bg-gray-900 border-gray-900;
+}

@@ -1,0 +1,309 @@
+<div class="min-h-screen bg-gray-50 py-8 sm:py-12">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-8 sm:mb-12">
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">☕ Buy Me Coffee</h1>
+      <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+        Support the development of ApprovalSeal and help keep it free for everyone
+      </p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+      <!-- Left Column - About Support -->
+      <div class="bg-white rounded-lg shadow-md p-6 sm:p-8">
+        <div class="text-center mb-6">
+          <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-3xl">☕</span>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">Support ApprovalSeal</h2>
+          <p class="text-gray-600">
+            Your support helps keep this tool free and continuously improved
+          </p>
+        </div>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <div class="flex-shrink-0">
+              <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                <span class="text-green-600 text-sm">✓</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900">Free Forever</h3>
+              <p class="text-gray-600 text-sm">ApprovalSeal will always remain free to use</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-3">
+            <div class="flex-shrink-0">
+              <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                <span class="text-blue-600 text-sm">⚡</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900">Continuous Updates</h3>
+              <p class="text-gray-600 text-sm">Regular improvements and new industry templates</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-3">
+            <div class="flex-shrink-0">
+              <div class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
+                <span class="text-purple-600 text-sm">🛠️</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900">Bug Fixes & Support</h3>
+              <p class="text-gray-600 text-sm">Quick resolution of issues and user support</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-3">
+            <div class="flex-shrink-0">
+              <div class="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center">
+                <span class="text-orange-600 text-sm">🏭</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900">Industry-Specific Features</h3>
+              <p class="text-gray-600 text-sm">Specialized templates for construction, suppliers, and mechanics</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <h3 class="font-semibold text-gray-900 mb-2">About the Developer</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            Hi! I'm Nathan, a passionate developer from South Africa. I created ApprovalSeal to help 
+            local businesses across all industries create professional invoices easily. Your support helps 
+            me dedicate more time to improving this tool and adding new industry-specific features for the 
+            South African business community.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column - Support Options -->
+      <div class="space-y-6">
+        <!-- Buy Me Coffee Card -->
+        <div class="bg-white rounded-lg shadow-md p-6 sm:p-8">
+          <div class="text-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Choose Your Support</h2>
+            <p class="text-gray-600">Every contribution helps, no matter the size!</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <!-- Coffee Options -->
+            <div 
+              *ngFor="let option of coffeeOptions" 
+              class="border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:border-amber-400 hover:bg-amber-50 transition-all duration-200"
+              [class.border-amber-400]="selectedAmount === option.amount"
+              [class.bg-amber-50]="selectedAmount === option.amount"
+              (click)="selectAmount(option.amount)"
+            >
+              <div class="text-center">
+                <div class="text-2xl mb-2">{{ option.emoji }}</div>
+                <div class="font-semibold text-gray-900">{{ option.name }}</div>
+                <div class="text-amber-600 font-bold">R{{ option.amount }}</div>
+                <div class="text-xs text-gray-500 mt-1">{{ option.description }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Custom Amount -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              Or enter a custom amount (ZAR)
+            </label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+              <input
+                type="number"
+                [(ngModel)]="customAmount"
+                (ngModelChange)="onCustomAmountChange()"
+                class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                placeholder="0.00"
+                min="5"
+                step="5"
+              />
+            </div>
+          </div>
+
+          <!-- Email Input for Paystack -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              Email Address (for payment receipt)
+            </label>
+            <input
+              type="email"
+              [(ngModel)]="supporterEmail"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              placeholder="your@email.com"
+              required
+            />
+          </div>
+
+          <!-- Payment Method Selection -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-3">
+              Choose Payment Method
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                type="button"
+                (click)="selectPaymentMethod('paystack')"
+                class="flex items-center justify-center space-x-2 p-3 border-2 rounded-lg transition-all duration-200"
+                [class.border-blue-500]="selectedPaymentMethod === 'paystack'"
+                [class.bg-blue-50]="selectedPaymentMethod === 'paystack'"
+                [class.border-gray-200]="selectedPaymentMethod !== 'paystack'"
+              >
+                <span class="text-blue-600">💳</span>
+                <span class="font-medium">Card Payment</span>
+              </button>
+              
+              <button
+                type="button"
+                (click)="selectPaymentMethod('eft')"
+                class="flex items-center justify-center space-x-2 p-3 border-2 rounded-lg transition-all duration-200"
+                [class.border-green-500]="selectedPaymentMethod === 'eft'"
+                [class.bg-green-50]="selectedPaymentMethod === 'eft'"
+                [class.border-gray-200]="selectedPaymentMethod !== 'eft'"
+              >
+                <span class="text-green-600">🏦</span>
+                <span class="font-medium">EFT/Bank Transfer</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Support Button -->
+          <button
+            type="button"
+            (click)="supportDeveloper()"
+            class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
+            [disabled]="!selectedAmount || selectedAmount < 5 || !supporterEmail || !selectedPaymentMethod"
+          >
+            <span>☕</span>
+            <span>Support with R{{ selectedAmount || 0 }}</span>
+          </button>
+
+          <p class="text-xs text-gray-500 text-center mt-3" *ngIf="selectedPaymentMethod === 'paystack'">
+            Secure payment powered by Paystack
+          </p>
+          <p class="text-xs text-gray-500 text-center mt-3" *ngIf="selectedPaymentMethod === 'eft'">
+            Bank transfer details will be provided after clicking support
+          </p>
+        </div>
+
+        <!-- EFT Details Modal/Card (shown when EFT is selected) -->
+        <div *ngIf="showEftDetails" class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-900">EFT Payment Details</h3>
+            <button
+              type="button"
+              (click)="closeEftDetails()"
+              class="text-gray-400 hover:text-gray-600"
+            >
+              <span class="text-xl">×</span>
+            </button>
+          </div>
+          
+          <div class="space-y-3">
+            <div class="bg-gray-50 p-3 rounded">
+              <div class="text-sm font-medium text-gray-700">Account Holder</div>
+              <div class="text-gray-900 font-mono">Nathan Divakaran</div>
+            </div>
+            
+            <div class="bg-gray-50 p-3 rounded">
+              <div class="text-sm font-medium text-gray-700">Cell Phone Number</div>
+              <div class="text-gray-900 font-mono">076 471 5965</div>
+            </div>
+            
+            <div class="bg-gray-50 p-3 rounded">
+              <div class="text-sm font-medium text-gray-700">Amount</div>
+              <div class="text-gray-900 font-mono text-lg font-bold">R{{ selectedAmount }}</div>
+            </div>
+            
+            <div class="bg-gray-50 p-3 rounded">
+              <div class="text-sm font-medium text-gray-700">Reference</div>
+              <div class="text-gray-900 font-mono">ApprovalSeal Support</div>
+            </div>
+          </div>
+          
+          <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+            <div class="text-sm text-blue-800">
+              <strong>Instructions:</strong>
+              <ol class="list-decimal list-inside mt-2 space-y-1">
+                <li>Use your banking app or visit your bank</li>
+                <li>Make an EFT to the cell phone number above</li>
+                <li>Use "ApprovalSeal Support" as reference</li>
+                <li>Send proof of payment to support&#64;approvalseal.co.za</li>
+              </ol>
+            </div>
+          </div>
+          
+          <div class="mt-4 text-center">
+            <p class="text-sm text-gray-600">
+              Thank you for your support! Your contribution helps keep ApprovalSeal free for everyone.
+            </p>
+          </div>
+        </div>
+
+        <!-- Alternative Support -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Other Ways to Support</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                <span class="text-gray-600">⭐</span>
+              </div>
+              <div>
+                <div class="font-medium text-gray-900">Share with Friends</div>
+                <div class="text-sm text-gray-600">Tell other SA businesses about ApprovalSeal</div>
+              </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                <span class="text-gray-600">💡</span>
+              </div>
+              <div>
+                <div class="font-medium text-gray-900">Send Feedback</div>
+                <div class="text-sm text-gray-600">Help improve the tool with your suggestions</div>
+              </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                <span class="text-gray-600">🐛</span>
+              </div>
+              <div>
+                <div class="font-medium text-gray-900">Report Issues</div>
+                <div class="text-sm text-gray-600">Help us fix bugs and improve stability</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GitHub Link -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Follow Development</h3>
+          <a 
+            href="https://github.com/Nathandiv" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition-colors duration-200"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <span class="font-medium">Follow on GitHub</span>
+          </a>
+          <p class="text-sm text-gray-600 mt-2">
+            Star the repository and follow for updates on new features and improvements.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

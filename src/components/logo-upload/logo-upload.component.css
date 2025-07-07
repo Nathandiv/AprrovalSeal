@@ -1,0 +1,88 @@
+.logo-upload-section {
+  @apply bg-white rounded-lg shadow-md border border-gray-200 p-6 mb-6;
+}
+
+.section-header {
+  @apply flex items-center justify-between mb-4;
+}
+
+.section-title {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.add-button {
+  @apply bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+}
+
+.logo-upload-area {
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer transition-all duration-200 hover:border-gray-400 hover:bg-gray-50 relative;
+}
+
+.logo-upload-area.drag-over {
+  @apply border-gray-500 bg-gray-100;
+}
+
+.logo-upload-area.has-logo {
+  @apply border-solid border-gray-200 p-4;
+}
+
+.upload-prompt {
+  @apply flex flex-col items-center space-y-4;
+}
+
+.upload-icon {
+  @apply flex items-center justify-center;
+}
+
+.upload-text {
+  @apply space-y-1;
+}
+
+.upload-primary {
+  @apply text-sm font-medium text-gray-900;
+}
+
+.upload-secondary {
+  @apply text-xs text-gray-500;
+}
+
+.logo-preview {
+  @apply relative;
+}
+
+.logo-preview:hover .logo-overlay {
+  @apply opacity-100;
+}
+
+.logo-image {
+  @apply max-w-full max-h-32 object-contain mx-auto rounded;
+}
+
+.logo-overlay {
+  @apply absolute inset-0 bg-black bg-opacity-50 opacity-0 transition-opacity duration-200 flex items-center justify-center space-x-2 rounded;
+}
+
+.remove-logo-btn,
+.change-logo-btn {
+  @apply bg-white text-gray-700 hover:text-red-600 p-2 rounded-full transition-colors duration-200;
+}
+
+.remove-logo-btn:hover {
+  @apply text-red-600;
+}
+
+.change-logo-btn:hover {
+  @apply text-blue-600;
+}
+
+.logo-info {
+  @apply mt-3 text-center;
+}
+
+.logo-filename {
+  @apply text-sm text-gray-600 truncate;
+}
+
+.hidden {
+  @apply sr-only;
+}

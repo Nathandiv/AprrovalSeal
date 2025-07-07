@@ -1,0 +1,249 @@
+<div class="space-y-4 sm:space-y-6">
+  <!-- Invoice Details -->
+  <div class="form-section">
+    <h3 class="section-title">Invoice Details</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Invoice Title</label>
+        <input
+          type="text"
+          [(ngModel)]="invoice.invoiceTitle"
+          (ngModelChange)="updateInvoice()"
+          class="form-input"
+          placeholder="INVOICE"
+        />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Invoice Number</label>
+        <input
+          type="text"
+          [(ngModel)]="invoice.invoiceNumber"
+          (ngModelChange)="updateInvoice()"
+          class="form-input"
+          placeholder="INV-001"
+        />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Issue Date</label>
+        <input
+          type="date"
+          [(ngModel)]="invoice.date"
+          (ngModelChange)="updateInvoice()"
+          class="form-input"
+        />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Due Date</label>
+        <input
+          type="date"
+          [(ngModel)]="invoice.dueDate"
+          (ngModelChange)="updateInvoice()"
+          class="form-input"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Company Information -->
+  <div class="form-section">
+    <h3 class="section-title">Your Information</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Company Name</label>
+        <input
+          type="text"
+          [(ngModel)]="invoice.companyName"
+          (ngModelChange)="updateInvoice()"
+          class="form-input"
+          placeholder="Your Company Name"
+        />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input
+          type="email"
+          [(ngModel)]="invoice.companyEmail"
+          (ngModelChange)="updateInvoice()"
+          class="form-input"
+          placeholder="your@email.co.za"
+        />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <input
+          type="tel"
+          [(ngModel)]="invoice.companyPhone"
+          (ngModelChange)="updateInvoice()"
+          class="form-input"
+          placeholder="+27 11 123 4567"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Address</label>
+      <textarea
+        [(ngModel)]="invoice.companyAddress"
+        (ngModelChange)="updateInvoice()"
+        class="form-input"
+        rows="3"
+        placeholder="123 Main Street, Sandton, Johannesburg, Gauteng, 2196"
+      ></textarea>
+    </div>
+  </div>
+
+  <!-- Client Information -->
+  <div class="form-section">
+    <h3 class="section-title">Bill To</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Client Name</label>
+        <input
+          type="text"
+          [(ngModel)]="invoice.clientName"
+          (ngModelChange)="updateInvoice()"
+          class="form-input"
+          placeholder="Client Name"
+        />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Client Email</label>
+        <input
+          type="email"
+          [(ngModel)]="invoice.clientEmail"
+          (ngModelChange)="updateInvoice()"
+          class="form-input"
+          placeholder="client@email.co.za"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Client Address</label>
+      <textarea
+        [(ngModel)]="invoice.clientAddress"
+        (ngModelChange)="updateInvoice()"
+        class="form-input"
+        rows="3"
+        placeholder="456 Client Street, Cape Town, Western Cape, 8001"
+      ></textarea>
+    </div>
+  </div>
+
+  <!-- Invoice Items -->
+  <div class="form-section">
+    <div class="section-header">
+      <h3 class="section-title">Invoice Items</h3>
+      <button type="button" (click)="addItem()" class="add-button">
+        + Add Item
+      </button>
+    </div>
+    
+    <div class="items-table">
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr class="table-header">
+              <th class="table-cell">Description</th>
+              <th class="table-cell">Qty</th>
+              <th class="table-cell">Rate</th>
+              <th class="table-cell">Amount</th>
+              <th class="table-cell"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoice.items; trackBy: trackByItemId" class="table-row">
+              <td class="table-cell">
+                <input
+                  type="text"
+                  [(ngModel)]="item.description"
+                  (ngModelChange)="updateItem(item.id, { description: $event })"
+                  class="form-input"
+                  placeholder="Item description"
+                />
+              </td>
+              <td class="table-cell">
+                <input
+                  type="number"
+                  [(ngModel)]="item.quantity"
+                  (ngModelChange)="updateItem(item.id, { quantity: $event })"
+                  class="form-input"
+                  min="0"
+                  step="1"
+                />
+              </td>
+              <td class="table-cell">
+                <input
+                  type="number"
+                  [(ngModel)]="item.rate"
+                  (ngModelChange)="updateItem(item.id, { rate: $event })"
+                  class="form-input"
+                  min="0"
+                  step="0.01"
+                />
+              </td>
+              <td class="table-cell">
+                <div class="amount-display">
+                  {{ item.amount | currency:'ZAR':'symbol':'1.2-2' }}
+                </div>
+              </td>
+              <td class="table-cell">
+                <button
+                  type="button"
+                  (click)="removeItem(item.id)"
+                  class="remove-button"
+                  [disabled]="invoice.items.length === 1"
+                >
+                  ✕
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tax and Totals -->
+  <div class="form-section">
+    <h3 class="section-title">VAT & Total</h3>
+    <div class="totals-section">
+      <div class="total-row">
+        <span class="total-label">Subtotal:</span>
+        <span class="total-value">{{ invoice.subtotal | currency:'ZAR':'symbol':'1.2-2' }}</span>
+      </div>
+      <div class="total-row">
+        <label class="total-label">VAT Rate (%):</label>
+        <div class="tax-input">
+          <input
+            type="number"
+            [(ngModel)]="invoice.taxRate"
+            (ngModelChange)="updateInvoice()"
+            class="form-input"
+            min="0"
+            max="100"
+            step="0.01"
+          />
+        </div>
+      </div>
+      <div class="total-row">
+        <span class="total-label">VAT Amount:</span>
+        <span class="total-value">{{ invoice.taxAmount | currency:'ZAR':'symbol':'1.2-2' }}</span>
+      </div>
+      <div class="total-row final-total">
+        <span class="total-label">Total:</span>
+        <span class="total-value">{{ invoice.total | currency:'ZAR':'symbol':'1.2-2' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="form-section">
+    <h3 class="section-title">Notes</h3>
+    <textarea
+      [(ngModel)]="invoice.notes"
+      (ngModelChange)="updateInvoice()"
+      class="form-input"
+      rows="4"
+      placeholder="Additional notes or payment terms..."
+    ></textarea>
+  </div>
+</div>

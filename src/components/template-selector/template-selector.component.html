@@ -1,0 +1,102 @@
+<div class="mb-6 sm:mb-8">
+  <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Choose Invoice Template</h2>
+  
+  <!-- Template Categories -->
+  <div class="mb-6">
+    <div class="flex flex-wrap gap-2">
+      <button
+        type="button"
+        (click)="filterByCategory('all')"
+        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+        [class.bg-gray-900]="selectedCategory === 'all'"
+        [class.text-white]="selectedCategory === 'all'"
+        [class.bg-gray-200]="selectedCategory !== 'all'"
+        [class.text-gray-700]="selectedCategory !== 'all'"
+      >
+        All Templates
+      </button>
+      <button
+        type="button"
+        (click)="filterByCategory('general')"
+        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+        [class.bg-gray-900]="selectedCategory === 'general'"
+        [class.text-white]="selectedCategory === 'general'"
+        [class.bg-gray-200]="selectedCategory !== 'general'"
+        [class.text-gray-700]="selectedCategory !== 'general'"
+      >
+        General Business
+      </button>
+      <button
+        type="button"
+        (click)="filterByCategory('construction')"
+        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+        [class.bg-gray-900]="selectedCategory === 'construction'"
+        [class.text-white]="selectedCategory === 'construction'"
+        [class.bg-gray-200]="selectedCategory !== 'construction'"
+        [class.text-gray-700]="selectedCategory !== 'construction'"
+      >
+        🏗️ Construction
+      </button>
+      <button
+        type="button"
+        (click)="filterByCategory('supplier')"
+        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+        [class.bg-blue-600]="selectedCategory === 'supplier'"
+        [class.text-white]="selectedCategory === 'supplier'"
+        [class.bg-blue-100]="selectedCategory !== 'supplier'"
+        [class.text-blue-700]="selectedCategory !== 'supplier'"
+      >
+        📦 Suppliers
+      </button>
+      <button
+        type="button"
+        (click)="filterByCategory('mechanic')"
+        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+        [class.bg-red-600]="selectedCategory === 'mechanic'"
+        [class.text-white]="selectedCategory === 'mechanic'"
+        [class.bg-red-100]="selectedCategory !== 'mechanic'"
+        [class.text-red-700]="selectedCategory !== 'mechanic'"
+      >
+        🔧 Mechanics
+      </button>
+    </div>
+  </div>
+
+  <!-- Reduced grid size for medium cards -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+    <div
+      *ngFor="let template of filteredTemplates"
+      class="template-card"
+      [class.selected]="selectedTemplate?.id === template.id"
+      (click)="selectTemplate(template)"
+    >
+      <div class="template-preview">
+        <img 
+          [src]="getTemplateImage(template.id)" 
+          [alt]="template.name + ' template preview'"
+          class="template-image"
+        />
+        <div *ngIf="template.category === 'construction'" class="category-badge construction">
+          🏗️ Construction
+        </div>
+        <div *ngIf="template.category === 'supplier'" class="category-badge supplier">
+          📦 Supplier
+        </div>
+        <div *ngIf="template.category === 'mechanic'" class="category-badge mechanic">
+          🔧 Mechanic
+        </div>
+      </div>
+      <div class="template-info">
+        <h3 class="template-title">{{ template.name }}</h3>
+        <p class="template-description">{{ template.description }}</p>
+        <div class="template-footer">
+          <div class="flex items-center space-x-2">
+            <span class="template-tag">{{ template.styles.layout | titlecase }}</span>
+          </div>
+          <div class="selection-indicator" [class.selected]="selectedTemplate?.id === template.id"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
