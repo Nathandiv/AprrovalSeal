@@ -56,11 +56,9 @@ export class TemplateSelectorComponent implements OnInit {
       'construction': 'https://i.pinimg.com/736x/a2/40/30/a24030edca7b89a26c9984b0b61c6b0c.jpg',
       'construction-pro': 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=400',
       'supplier': 'https://i.pinimg.com/736x/42/5f/cd/425fcd8a94c9174e39f00b9091b5c781.jpg',
-      'supplier-pro': 'https://images.pexels.com/photos/6863074/pexels-photo-6863074.jpeg?auto=compress&cs=tinysrgb&w=400',
       'supplier-branded': 'https://images.pexels.com/photos/6863074/pexels-photo-6863074.jpeg?auto=compress&cs=tinysrgb&w=400',
       'supplier-minimal': 'https://images.pexels.com/photos/6863074/pexels-photo-6863074.jpeg?auto=compress&cs=tinysrgb&w=400',
-      'mechanic': 'https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=400',
-      'mechanic-pro': 'https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=400'
+      'mechanic': 'https://i.pinimg.com/736x/98/a8/63/98a863f6165e21eacaa6ff1314487af7.jpg',
     };
     return images[templateId] || images['classic'];
   }
