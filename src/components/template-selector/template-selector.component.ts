@@ -55,7 +55,7 @@ export class TemplateSelectorComponent implements OnInit {
       'elegant': 'https://i.pinimg.com/736x/23/ba/b6/23bab6c8a467b921d17e0ffd4487ef00.jpg',
       'construction': 'https://i.pinimg.com/736x/a2/40/30/a24030edca7b89a26c9984b0b61c6b0c.jpg',
       'construction-pro': 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=400',
-      'supplier': 'https://images.pexels.com/photos/6863074/pexels-photo-6863074.jpeg?auto=compress&cs=tinysrgb&w=400',
+      'supplier': 'https://i.pinimg.com/736x/42/5f/cd/425fcd8a94c9174e39f00b9091b5c781.jpg',
       'supplier-pro': 'https://images.pexels.com/photos/6863074/pexels-photo-6863074.jpeg?auto=compress&cs=tinysrgb&w=400',
       'supplier-branded': 'https://images.pexels.com/photos/6863074/pexels-photo-6863074.jpeg?auto=compress&cs=tinysrgb&w=400',
       'supplier-minimal': 'https://images.pexels.com/photos/6863074/pexels-photo-6863074.jpeg?auto=compress&cs=tinysrgb&w=400',
