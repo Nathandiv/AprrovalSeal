@@ -12,7 +12,7 @@
 }
 
 .template-image {
-  @apply  w-[105%] h-full object-cover -ml-[100%];
+  @apply w-full h-full object-cover block;
 }
 
 .logo-badge {

@@ -44,15 +44,15 @@ export class TemplateSelectorComponent implements OnInit {
 
   getTemplateImage(templateId: string): string {
     const images: { [key: string]: string } = {
-      'classic': 'https://i.pinimg.com/736x/47/a4/54/47a4546840e8ed1fcea0885697ef89ab.jpg',
-      'modern': 'https://images.pexels.com/photos/7947664/pexels-photo-7947664.jpeg?auto=compress&cs=tinysrgb&w=400',
-      'professional': 'https://images.pexels.com/photos/6863332/pexels-photo-6863332.jpeg?auto=compress&cs=tinysrgb&w=400',
-      'creative': 'https://images.pexels.com/photos/7947761/pexels-photo-7947761.jpeg?auto=compress&cs=tinysrgb&w=400',
+      'classic': 'https://i.pinimg.com/736x/e0/be/f1/e0bef127bca076f3631cd1d44b373680.jpg',
+      'modern': 'https://i.pinimg.com/736x/42/5f/cd/425fcd8a94c9174e39f00b9091b5c781.jpg',
+      'professional': 'https://i.pinimg.com/736x/58/c5/35/58c5359a5c74aa0c12882a12a976e2ff.jpg',
+      'creative': 'https://i.pinimg.com/736x/ec/16/86/ec1686b1a4da57a91abb6e748ff2fcf2.jpg',
       'branded-left': 'https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=400',
       'branded-right': 'https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=400',
       'corporate': 'https://images.pexels.com/photos/7947807/pexels-photo-7947807.jpeg?auto=compress&cs=tinysrgb&w=400',
-      'minimal': 'https://images.pexels.com/photos/6863074/pexels-photo-6863074.jpeg?auto=compress&cs=tinysrgb&w=400',
-      'elegant': 'https://images.pexels.com/photos/6863195/pexels-photo-6863195.jpeg?auto=compress&cs=tinysrgb&w=400',
+      'minimal': 'https://i.pinimg.com/736x/3d/16/01/3d1601956fda317e929890a9c25958f3.jpg',
+      'elegant': 'https://i.pinimg.com/736x/23/ba/b6/23bab6c8a467b921d17e0ffd4487ef00.jpg',
       'construction': 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=400',
       'construction-pro': 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=400',
       'supplier': 'https://images.pexels.com/photos/6863074/pexels-photo-6863074.jpeg?auto=compress&cs=tinysrgb&w=400',
