@@ -7,8 +7,8 @@
 }
 
 .template-preview {
-  @apply aspect-[3/4] bg-gray-100 rounded-t-lg overflow-hidden relative;
-  height: 120px; /* Reduced height for medium size */
+  @apply w-full bg-gray-100 rounded-t-lg overflow-hidden relative;
+  height: 120px; /* Keep this if you want consistent image height */
 }
 
 .template-image {
