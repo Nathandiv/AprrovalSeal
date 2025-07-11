@@ -186,93 +186,87 @@
       <div class="bg-white rounded-lg shadow-md p-6 sm:p-8">
         <h2 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h2>
 
-        <form (ngSubmit)="onSubmit()" class="space-y-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label
-                for="name"
-                class="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Full Name *
-              </label>
-              <input
-                type="text"
-                id="name"
-                [(ngModel)]="contactForm.name"
-                name="name"
-                required
-                class="input-field"
-                placeholder="Your full name"
-              />
-            </div>
-            <div>
-              <label
-                for="email"
-                class="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Email Address *
-              </label>
-              <input
-                type="email"
-                id="email"
-                [(ngModel)]="contactForm.email"
-                name="email"
-                required
-                class="input-field"
-                placeholder="your@email.com"
-              />
-            </div>
-          </div>
+       <!-- Success message -->
 
-          <div>
-            <label
-              for="subject"
-              class="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Subject *
-            </label>
-            <input
-              type="text"
-              id="subject"
-              [(ngModel)]="contactForm.subject"
-              name="subject"
-              required
-              class="input-field"
-              placeholder="What is this regarding?"
-            />
-          </div>
 
-          <div>
-            <label
-              for="message"
-              class="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Message *
-            </label>
-            <textarea
-              id="message"
-              [(ngModel)]="contactForm.message"
-              name="message"
-              required
-              rows="6"
-              class="input-field resize-none"
-              placeholder="Tell us how we can help you..."
-            ></textarea>
-          </div>
+<!-- Web3Forms Contact Form -->
+<form
+  #contactFormRef="ngForm"
+  (ngSubmit)="submitForm(contactFormRef)"
+  class="space-y-6"
+  novalidate
+>
+  <input type="hidden" name="access_key" value="18155a87-df5c-4465-b923-8cb64eb3e1b3" />
 
-          <button
-            type="submit"
-            class="btn-primary w-full"
-            [disabled]="
-              !contactForm.name ||
-              !contactForm.email ||
-              !contactForm.subject ||
-              !contactForm.message
-            "
-          >
-            Send Message
-          </button>
-        </form>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div>
+      <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        class="input-field"
+        placeholder="Your full name"
+        ngModel
+      />
+    </div>
+
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        class="input-field"
+        placeholder="your@email.com"
+        ngModel
+      />
+    </div>
+  </div>
+
+  <div>
+    <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject *</label>
+    <input
+      type="text"
+      id="subject"
+      name="subject"
+      required
+      class="input-field"
+      placeholder="What is this regarding?"
+      ngModel
+    />
+  </div>
+
+  <div>
+    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows="6"
+      class="input-field resize-none"
+      placeholder="Tell us how we can help you..."
+      ngModel
+    ></textarea>
+  </div>
+
+  <button
+    type="submit"
+    class="btn-primary w-full"
+    [disabled]="contactFormRef.invalid"
+  >
+    Send Message
+  </button>
+</form>
+<div
+  *ngIf="success"
+  class="bg-green-100 text-green-700 p-4 rounded-md mb-4 text-center"
+>
+  ✅ Thank you! Your message has been sent successfully.
+</div>
+
       </div>
     </div>
   </div>

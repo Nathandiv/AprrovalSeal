@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -10,26 +10,39 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {
-  contactForm = {
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  };
+ success = false;
 
-  onSubmit(): void {
-    // Handle form submission
-    console.log('Contact form submitted:', this.contactForm);
-    alert('Thank you for your message! We will get back to you soon.');
-    this.resetForm();
-  }
+async submitForm(form: NgForm) {
+  if (form.invalid) return;
 
-  private resetForm(): void {
-    this.contactForm = {
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    };
+  const formData = new FormData();
+  formData.append('access_key', '18155a87-df5c-4465-b923-8cb64eb3e1b3');
+
+  // Append form fields
+  Object.entries(form.value).forEach(([key, value]) => {
+    formData.append(key, value as string);
+  });
+
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+    console.log('Web3Forms response:', result); 
+
+    if (result.success) {
+      this.success = true;
+      form.resetForm();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      alert(`Submission failed: ${result.message}`);
+    }
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert('Network error. Please check your internet and try again.');
   }
+}
+
 }
