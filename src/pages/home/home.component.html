@@ -18,7 +18,8 @@
           <button
             type="button"
             (click)="downloadPDF()"
-            class="btn-primary w-full sm:w-auto"
+            class="btn-primary w-full sm:w-auto hover:bg-blue-700 hover:scale-105 transition duration-300"
+            style="background-color: black; cursor: pointer;"
             [disabled]="isGeneratingPDF"
           >
             <span *ngIf="!isGeneratingPDF">📥 Download PDF</span>
