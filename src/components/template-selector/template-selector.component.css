@@ -8,7 +8,7 @@
 
 .template-preview {
   @apply w-full bg-gray-100 rounded-t-lg overflow-hidden relative;
-  height: 120px; /* Keep this if you want consistent image height */
+  height: 120px; 
 }
 
 .template-image {
@@ -36,15 +36,15 @@
 }
 
 .template-info {
-  @apply p-3; /* Reduced padding */
+  @apply p-3; 
 }
 
 .template-title {
-  @apply font-semibold text-gray-900 mb-1 text-sm; /* Smaller text and margin */
+  @apply font-semibold text-gray-900 mb-1 text-sm;
 }
 
 .template-description {
-  @apply text-xs text-gray-600 mb-2; /* Smaller text and margin */
+  @apply text-xs text-gray-600 mb-2;
 }
 
 .template-footer {

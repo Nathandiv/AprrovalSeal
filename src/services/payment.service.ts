@@ -14,7 +14,7 @@ export interface PaymentData {
   providedIn: 'root'
 })
 export class PaymentService {
-  private paystackPublicKey = 'pk_test_your_paystack_public_key_here'; // Replace with your actual Paystack public key
+  private paystackPublicKey = 'pk_test_your_paystack_public_key_here'; 
 
   constructor() {
     this.loadPaystackScript();
