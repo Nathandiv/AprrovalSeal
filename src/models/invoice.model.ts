@@ -12,6 +12,7 @@ export interface InvoiceData {
   date: string;
   dueDate: string;
   
+  
   // Company Info
   companyName: string;
   companyAddress: string;

@@ -16,7 +16,7 @@
     <div *ngIf="!selectedTemplate || selectedTemplate.id === 'classic'" class="template-content">
       <div class="invoice-header">
         <div class="header-left">
-          <h1 class="invoice-title">INVOICE</h1>
+          <h1 class="invoice-title">{{ invoice.invoiceTitle || 'INVOICE' }}</h1>
           <p class="invoice-number">{{ invoice.invoiceNumber || 'INV-001' }}</p>
         </div>
         <div class="header-right">
